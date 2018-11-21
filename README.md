@@ -6,3 +6,5 @@ poc on https://www.prisma.io
 ``` bash
 make start
 ```
+
+http://127.0.0.1:4466/
