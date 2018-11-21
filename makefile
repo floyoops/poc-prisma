@@ -1,7 +1,7 @@
 USER_UID = $(shell id -u)
 DOCKER = docker-compose -f ./docker-compose.yml -p poc-prisma
 
-.PHONE: start
+.PHONY: start
 start: erase build up
 
 .PHONY: stop
