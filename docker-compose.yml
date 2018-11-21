@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+    node:
+        build: "./Docker/node/10"
+        hostname: "pr-node"
+        container_name: "pr-node"
+        working_dir: "/app"
+        restart: "no"
+        volumes:
+            - "./.:/app"
+        environment:
+            PROJECT_NAME: "poc-prisma"
+        networks:
+            - "default"
+    prisma:
+        image: "prismagraphql/prisma:1.20"
+        hostname: "pr-prisma"
+        container_name: "pr-prisma"
+        restart: "no"
+        ports:
+            - "4466:4466"
+        environment:
+            PRISMA_CONFIG: |
+                port: 4466
+                databases:
+                  default:
+                    connector: mysql
+                    host: db
+                    port: 3306
+                    user: root
+                    password: toor
+                    migrations: true
+    db:
+        image: "mariadb"
+        container_name: "pr-db"
+        hostname: "pr-db"
+        restart: "no"
+        environment:
+           MYSQL_ROOT_PASSWORD: "toor"
+        ports:
+            - "3306:3306"
+        networks:
+            - "default"
+        volumes:
+            - "./var/mysql:/var/lib/mysql"
+
+networks:
+    default:
+        driver: "bridge"
