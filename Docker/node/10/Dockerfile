@@ -8,7 +8,3 @@ RUN printf "deb http://httpredir.debian.org/debian jessie-backports main non-fre
 RUN apt-get update && \
     apt-get install -y rsync && apt-get install -y -t jessie-backports openjdk-8-jre-headless && apt-get install -y chromedriver && \
     npm install -g vue-cli
-
-EXPOSE 4444
-
-WORKDIR /var/www/${PROJECT_NAME}
